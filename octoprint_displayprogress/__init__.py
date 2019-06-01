@@ -12,7 +12,8 @@ class DisplayProgressPlugin(octoprint.plugin.ProgressPlugin,
 
 	def get_settings_defaults(self):
 		return dict(
-			message="{bar} {progress:>3}%"
+			message="{bar} {progress:>3}%",
+			marlin_bar=True
 		)
 
 	##~~ Softwareupdate hook
@@ -52,11 +53,14 @@ class DisplayProgressPlugin(octoprint.plugin.ProgressPlugin,
 	##~~ helpers
 
 	def _send_message(self, storage, path, progress):
+		marlin_bar = self._settings.get(["marlin_bar"])
 		message = self._settings.get(["message"]).format(progress=progress,
 		                                                 storage=storage,
 		                                                 path=path,
 		                                                 bar=self.__class__._progress_bar(progress))
 		self._printer.commands("M117 {}".format(message))
+		if marlin_bar:
+			self._printer.commands("M79 P{progress}").format(progress=progress)
 
 	@classmethod
 	def _progress_bar(cls, progress):

@@ -60,7 +60,7 @@ class DisplayProgressPlugin(octoprint.plugin.ProgressPlugin,
 		                                                 bar=self.__class__._progress_bar(progress))
 		self._printer.commands("M117 {}".format(message))
 		if marlin_bar:
-			self._printer.commands("M79 P{progress}".format(progress=progress))
+			self._printer.commands("M73 P{progress}".format(progress=progress))
 
 	@classmethod
 	def _progress_bar(cls, progress):

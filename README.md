@@ -19,7 +19,7 @@ plugins:
     # The message to display. Placeholders:
     # - bar: a progress bar, e.g. [######    ]
     # - progress: the current progress as an integer between 1 and 100
-    # - marlin_bar: whether to use the M79 command (Marlin FW).
+    # - marlin_bar: whether to use the M73 command (Marlin FW).
     message: "{bar} {progress:>3}%%"
     marlin_bar: True
 ```

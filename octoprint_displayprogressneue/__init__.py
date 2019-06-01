@@ -59,7 +59,7 @@ class DisplayProgressNeuePlugin(octoprint.plugin.ProgressPlugin,
 		                                                 storage=storage,
 		                                                 path=path,
 		                                                 bar=self.__class__._progress_bar(progress),
-														 time=self.__class__.time_string()
+														 time=self.__class__._time_string()
 														)
 		self._printer.commands("M117 {}".format(message))
 		if marlin_bar:

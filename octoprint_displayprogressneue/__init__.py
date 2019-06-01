@@ -32,7 +32,7 @@ class DisplayProgressNeuePlugin(octoprint.plugin.ProgressPlugin,
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/OctoPrint/OctoPrint-DisplayProgressNeue/archive/{target_version}.zip"
+				pip="https://github.com/juniorRubyist/OctoPrint-DisplayProgressNeue/archive/{target_version}.zip"
 			)
 		)
 

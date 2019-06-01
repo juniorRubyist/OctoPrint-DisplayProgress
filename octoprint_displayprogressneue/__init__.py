@@ -3,6 +3,7 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 import octoprint.events
+import time
 
 class DisplayProgressNeuePlugin(octoprint.plugin.ProgressPlugin,
                             octoprint.plugin.EventHandlerPlugin,
@@ -57,7 +58,9 @@ class DisplayProgressNeuePlugin(octoprint.plugin.ProgressPlugin,
 		message = self._settings.get(["message"]).format(progress=progress,
 		                                                 storage=storage,
 		                                                 path=path,
-		                                                 bar=self.__class__._progress_bar(progress))
+		                                                 bar=self.__class__._progress_bar(progress),
+														 time=self.__class__.time_string()
+														)
 		self._printer.commands("M117 {}".format(message))
 		if marlin_bar:
 			self._printer.commands("M73 P{progress}".format(progress=progress))
@@ -67,6 +70,11 @@ class DisplayProgressNeuePlugin(octoprint.plugin.ProgressPlugin,
 		hashes = "#" * int(round(progress / 10))
 		spaces = " " * (10 - len(hashes))
 		return "[{}{}]".format(hashes, spaces)
+	
+	@classmethod
+	def _time_string(cls):
+		t = time.localtime()
+		return "{h}:{m} {a}".format(h="0{h}".format(h=(12 if t.tm_hour%12==0 else t.tm_hour%12))[-2:], m="0{m}".format(m=t.tm_min)[-2:], a=("PM" if t.tm_hour/12 else "AM"))
 
 __plugin_name__ = "DisplayProgress Neue"
 

@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import octoprint.plugin
 import octoprint.events
 
-class DisplayProgressPlugin(octoprint.plugin.ProgressPlugin,
+class DisplayProgressNeuePlugin(octoprint.plugin.ProgressPlugin,
                             octoprint.plugin.EventHandlerPlugin,
                             octoprint.plugin.SettingsPlugin):
 
@@ -20,18 +20,18 @@ class DisplayProgressPlugin(octoprint.plugin.ProgressPlugin,
 
 	def get_update_information(self):
 		return dict(
-			displayprogress=dict(
-				displayName="DisplayProgress Plugin",
+			displayprogress_neue=dict(
+				displayName="DisplayProgress Neue",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
 				type="github_release",
-				user="OctoPrint",
-				repo="OctoPrint-DisplayProgress",
+				user="juniorRubyist",
+				repo="OctoPrint-DisplayProgressNeue",
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/OctoPrint/OctoPrint-DisplayProgress/archive/{target_version}.zip"
+				pip="https://github.com/OctoPrint/OctoPrint-DisplayProgressNeue/archive/{target_version}.zip"
 			)
 		)
 
@@ -68,11 +68,11 @@ class DisplayProgressPlugin(octoprint.plugin.ProgressPlugin,
 		spaces = " " * (10 - len(hashes))
 		return "[{}{}]".format(hashes, spaces)
 
-__plugin_name__ = "DisplayProgress"
+__plugin_name__ = "DisplayProgress Neue"
 
 def __plugin_load__():
 	global __plugin_implementation__
-	__plugin_implementation__ = DisplayProgressPlugin()
+	__plugin_implementation__ = DisplayProgressNeuePlugin()
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
